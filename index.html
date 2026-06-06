@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APEX RESEARCH • Research Peptides</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Space+Grotesk:wght@500;600&amp;display=swap');
+        :root {
+            --primary: #0f172a;
+        }
+        body {
+            font-family: 'Inter', system_ui, sans-serif;
+        }
+        .logo-font {
+            font-family: 'Space Grotesk', 'Inter', sans-serif;
+            font-weight: 600;
+            letter-spacing: -0.025em;
+        }
+        .section-header {
+            font-family: 'Space Grotesk', 'Inter', sans-serif;
+            font-weight: 600;
+            letter-spacing: -0.03em;
+        }
+        .product-card {
+            transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s;
+        }
+        .product-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+        .warning-banner {
+            background: linear-gradient(90deg, #451a03 0%, #78350f 100%);
+        }
+        .research-badge {
+            background-color: #fef3c7;
+            color: #92400e;
+            font-weight: 600;
+            font-size: 0.65rem;
+            padding: 1px 8px;
+            border-radius: 9999px;
+            letter-spacing: 0.5px;
+        }
+        .nav-active {
+            color: #0f172a;
+            font-weight: 600;
+        }
+        .modal {
+            animation: modalPop 0.2s ease-out forwards;
+        }
+        @keyframes modalPop {
+            from { transform: scale(0.95); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        .disclaimer-text {
+            font-size: 0.75rem;
+            line-height: 1.3;
+        }
+        .lab-grid {
+            background-image: 
+                linear-gradient(rgba(148, 163, 184, 0.06) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(148, 163, 184, 0.06) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+        .stat-number {
+            font-variant-numeric: tabular-nums;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900">
+    <!-- TOP LEGAL WARNING BANNER -->
+    <div class="warning-banner text-amber-100 py-2.5 px-4 text-center text-sm font-medium sticky top-0 z-50 shadow-md">
+        <div class="max-w-7xl mx-auto flex items-center justify-center gap-x-2 flex-wrap">
+            <i class="fa-solid fa-exclamation-triangle mr-2"></i>
+            <span class="font-semibold">FOR RESEARCH USE ONLY.</span> 
+            <span class="font-medium">NOT FOR HUMAN CONSUMPTION. NOT INTENDED FOR THERAPEUTIC, DIAGNOSTIC, OR ANY USE IN HUMANS OR ANIMALS.</span>
+            <span class="hidden md:inline ml-1.5 text-amber-200">| All products sold strictly for in vitro laboratory research by qualified personnel.</span>
+        </div>
+    </div>
+
+    <!-- NAVBAR -->
+    <nav class="bg-white border-b border-slate-200 sticky top-[42px] z-40">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center gap-x-3">
+                    <div class="flex items-center gap-x-2">
+                        <div class="w-9 h-9 bg-slate-900 rounded-xl flex items-center justify-center">
+                            <i class="fa-solid fa-flask text-white text-xl"></i>
+                        </div>
+                        <div>
+                            <div class="logo-font text-2xl tracking-tighter font-semibold text-slate-900">APEX RESEARCH</div>
+                            <div class="text-[10px] text-slate-500 -mt-1.5 tracking-[1.5px] font-medium">LABORATORY GRADE</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hidden md:flex items-center gap-x-8 text-sm">
+                    <a href="#products" class="text-slate-600 hover:text-slate-900 transition-colors">Shop</a>
+                    <a href="#compliance" class="text-slate-600 hover:text-slate-900 transition-colors">Compliance</a>
+                    <a href="#faq" class="text-slate-600 hover:text-slate-900 transition-colors">Research FAQ</a>
+                    <a href="#contact" class="text-slate-600 hover:text-slate-900 transition-colors">Contact</a>
+                </div>
+
+                <div class="flex items-center gap-x-3">
+                    <button onclick="showAgeGate()" 
+                            class="hidden sm:flex items-center gap-x-1.5 px-3 py-1.5 text-xs font-medium text-slate-600 hover:text-slate-900 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors">
+                        <i class="fa-solid fa-user-shield text-xs"></i>
+                        <span>18+ Research Only</span>
+                    </button>
+                    
+                    <button onclick="showCart()" 
+                            class="flex items-center gap-x-2 bg-white hover:bg-slate-50 border border-slate-200 px-4 py-2 rounded-xl text-sm font-medium transition-all active:scale-[0.985]">
+                        <div class="relative">
+                            <i class="fa-solid fa-shopping-cart text-lg text-slate-700"></i>
+                            <span id="cart-count" 
+                                  class="absolute -top-1 -right-1 bg-red-600 text-white text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full">0</span>
+                        </div>
+                        <span class="hidden sm:inline font-semibold">Cart</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <div class="bg-white border-b border-slate-100">
+        <div class="max-w-7xl mx-auto px-6 pt-14 pb-16">
+            <div class="grid md:grid-cols-12 gap-10 items-center">
+                <div class="md:col-span-7">
+                    <div class="inline-flex items-center gap-x-2 bg-slate-100 text-slate-700 text-xs font-semibold tracking-widest px-3.5 py-1 rounded-full mb-6">
+                        <div class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></div>
+                        HPLC VERIFIED &bull; LOT TRACEABLE
+                    </div>
+                    
+                    <h1 class="text-6xl md:text-6xl leading-[1.05] tracking-tighter font-semibold section-header text-balance">
+                        Premium research peptides.<br>
+                        <span class="text-slate-500">For laboratory use only.</span>
+                    </h1>
+                    
+                    <p class="mt-5 max-w-lg text-lg text-slate-600">
+                        High-purity compounds for qualified researchers and scientific institutions. 
+                        Every batch third-party tested.
+                    </p>
+
+                    <div class="mt-8 flex flex-wrap items-center gap-3">
+                        <button onclick="document.getElementById('products').scrollIntoView({ behavior: 'smooth' })" 
+                                class="px-8 py-3.5 bg-slate-900 hover:bg-black text-white rounded-2xl font-semibold text-sm flex items-center gap-x-2 shadow-sm active:scale-[0.985] transition-all">
+                            <span>BROWSE CATALOG</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                        <button onclick="document.getElementById('compliance').scrollIntoView({ behavior: 'smooth' })" 
+                                class="px-7 py-3.5 border border-slate-300 hover:bg-slate-50 text-slate-700 rounded-2xl font-semibold text-sm flex items-center gap-x-2 transition-all">
+                            <i class="fa-solid fa-balance-scale"></i>
+                            <span>VIEW FULL COMPLIANCE</span>
+                        </button>
+                    </div>
+
+                    <div class="mt-8 flex items-center gap-x-6 text-xs">
+                        <div class="flex items-center gap-x-1.5 text-emerald-600">
+                            <i class="fa-solid fa-check-circle"></i>
+                            <span class="font-medium">99.5%+ Average Purity</span>
+                        </div>
+                        <div class="flex items-center gap-x-1.5 text-emerald-600">
+                            <i class="fa-solid fa-check-circle"></i>
+                            <span class="font-medium">COA on Request</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="md:col-span-5">
+                    <div class="bg-white border border-slate-200 shadow-sm rounded-3xl p-8 lab-grid">
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center text-sm">
+                                <div class="font-medium text-slate-500">Current Batch Traceability</div>
+                                <div class="font-mono text-emerald-600 text-xs font-semibold">LIVE</div>
+                            </div>
+                            <div class="grid grid-cols-3 gap-3 text-center">
+                                <div class="bg-slate-50 rounded-2xl p-4">
+                                    <div class="text-xs text-slate-500">LOTS SHIPPED</div>
+                                    <div class="text-2xl font-semibold tracking-tighter stat-number">14,892</div>
+                                </div>
+                                <div class="bg-slate-50 rounded-2xl p-4">
+                                    <div class="text-xs text-slate-500">INSTITUTIONS</div>
+                                    <div class="text-2xl font-semibold tracking-tighter stat-number">2,147</div>
+                                </div>
+                                <div class="bg-slate-50 rounded-2xl p-4">
+                                    <div class="text-xs text-slate-500">COUNTRIES</div>
+                                    <div class="text-2xl font-semibold tracking-tighter stat-number">37</div>
+                                </div>
+                            </div>
+                            <div class="pt-3 border-t border-slate-100 text-[10px] text-center text-slate-500">
+                                All shipments include lot-specific Certificate of Analysis
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TRUST BAR -->
+    <div class="max-w-7xl mx-auto px-6 py-4">
+        <div class="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-xs font-medium text-slate-500">
+            <div class="flex items-center gap-x-2"><i class="fa-solid fa-shield-halved text-emerald-600"></i> <span>Third-party HPLC/MS tested</span></div>
+            <div class="flex items-center gap-x-2"><i class="fa-solid fa-flask text-emerald-600"></i> <span>Research use only</span></div>
+            <div class="flex items-center gap-x-2"><i class="fa-solid fa-file-contract text-emerald-600"></i> <span>Full documentation available</span></div>
+            <div class="flex items-center gap-x-2"><i class="fa-solid fa-globe text-emerald-600"></i> <span>Ships to verified labs worldwide</span></div>
+        </div>
+    </div>
+
+    <!-- PRODUCTS SECTION -->
+    <div id="products" class="max-w-7xl mx-auto px-6 pt-8 pb-16">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-y-3">
+            <div>
+                <div class="uppercase tracking-[2px] text-xs font-semibold text-slate-500 mb-1">CATALOG</div>
+                <h2 class="section-header text-4xl tracking-tighter">Research Peptides</h2>
+            </div>
+            
+            <div class="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
+                <!-- Search -->
+                <div class="relative flex-1 md:w-72">
+                    <i class="fa-solid fa-search absolute left-4 top-3.5 text-slate-400"></i>
+                    <input id="search-input" type="text" placeholder="Search peptides (e.g. BPC-157)" 
+                           onkeyup="filterProducts()"
+                           class="w-full bg-white border border-slate-200 focus:border-slate-400 transition-colors pl-11 pr-4 py-2.5 text-sm rounded-2xl outline-none">
+                </div>
+                
+                <!-- Category filter -->
+                <select id="category-filter" onchange="filterProducts()" 
+                        class="bg-white border border-slate-200 text-sm rounded-2xl px-4 py-2.5 outline-none font-medium">
+                    <option value="">All Categories</option>
+                    <option value="Healing">Healing &amp; Recovery</option>
+                    <option value="Growth">Growth Hormone Secretagogues</option>
+                    <option value="Metabolic">Metabolic Research</option>
+                    <option value="Melanocortin">Melanocortins</option>
+                    <option value="Other">Other Research</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- PRODUCTS GRID -->
+        <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+            <!-- Populated by JavaScript -->
+        </div>
+
+        <div class="mt-8 text-center">
+            <div class="inline-flex items-center gap-2 text-xs px-4 py-2 bg-white border border-slate-200 rounded-2xl text-slate-600">
+                <i class="fa-solid fa-info-circle"></i>
+                <span>Need a custom synthesis or different quantity? <a href="#contact" class="font-semibold text-slate-800 hover:underline">Contact our research team</a></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- COMPLIANCE / LEGAL SECTION -->
+    <div id="compliance" class="bg-white border-y border-slate-200 py-14">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="max-w-2xl">
+                <div class="uppercase tracking-[1.5px] text-xs font-semibold text-amber-600 mb-2">LEGAL &amp; REGULATORY</div>
+                <h2 class="section-header text-4xl tracking-tighter mb-3">Strict Research Use Only</h2>
+                <p class="text-slate-600">All products offered by Apex Research are sold exclusively for legitimate scientific research purposes in controlled laboratory environments.</p>
+            </div>
+
+            <div class="mt-9 grid md:grid-cols-2 gap-5">
+                <div class="border border-slate-200 rounded-3xl p-6 bg-slate-50">
+                    <div class="flex gap-3">
+                        <div><i class="fa-solid fa-ban text-2xl text-red-600 mt-0.5"></i></div>
+                        <div class="flex-1">
+                            <div class="font-semibold mb-2">PROHIBITED USES</div>
+                            <ul class="text-sm space-y-1 text-slate-600 list-disc pl-5">
+                                <li>Human consumption or administration in any form</li>
+                                <li>Use in or on humans or animals for any purpose</li>
+                                <li>Resale or redistribution without written authorization</li>
+                                <li>Any use that violates applicable laws or regulations</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="border border-slate-200 rounded-3xl p-6">
+                    <div class="font-semibold mb-3 flex items-center gap-x-2">
+                        <i class="fa-solid fa-gavel"></i>
+                        <span>Buyer Responsibilities</span>
+                    </div>
+                    <div class="text-sm text-slate-600 space-y-2">
+                        <p>By purchasing, you represent and warrant that:</p>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li>You are a qualified researcher, laboratory, or institution</li>
+                            <li>You are purchasing solely for legitimate in vitro research</li>
+                            <li>You are 18 years of age or older</li>
+                            <li>You will not use these products for human or veterinary purposes</li>
+                            <li>You understand these products are not drugs or dietary supplements</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-5 p-4 bg-amber-50 border border-amber-200 rounded-2xl text-xs text-amber-900">
+                <strong>IMPORTANT:</strong> These statements have not been evaluated by the FDA or any other regulatory body. 
+                These products are not intended to diagnose, treat, cure, or prevent any disease. 
+                All products are sold for research purposes only. Misrepresentation of intended use may result in order cancellation and reporting.
+            </div>
+        </div>
+    </div>
+
+    <!-- FAQ -->
+    <div id="faq" class="max-w-7xl mx-auto px-6 py-14">
+        <h2 class="section-header text-3xl tracking-tight mb-8">Research Use FAQ</h2>
+        
+        <div class="max-w-3xl space-y-3">
+            <div class="bg-white border border-slate-200 rounded-2xl p-5">
+                <div class="font-semibold flex items-center gap-2"><i class="fa-solid fa-question-circle text-slate-400"></i> Are these products safe for human use?</div>
+                <div class="text-sm text-slate-600 mt-2 pl-6">No. These products are sold <strong>strictly for research use only</strong> and are <strong>not for human consumption</strong>. They have not been evaluated for safety or efficacy in humans.</div>
+            </div>
+            <div class="bg-white border border-slate-200 rounded-2xl p-5">
+                <div class="font-semibold flex items-center gap-2"><i class="fa-solid fa-question-circle text-slate-400"></i> Can I buy these for personal / bodybuilding / anti-aging use?</div>
+                <div class="text-sm text-slate-600 mt-2 pl-6"><strong>No.</strong> Any representation of personal use will result in order refusal. These products are intended exclusively for qualified laboratory research.</div>
+            </div>
+            <div class="bg-white border border-slate-200 rounded-2xl p-5">
+                <div class="font-semibold flex items-center gap-2"><i class="fa-solid fa-question-circle text-slate-400"></i> Do you provide Certificates of Analysis (COA)?</div>
+                <div class="text-sm text-slate-600 mt-2 pl-6">Yes. Every lot ships with lot-specific HPLC/MS documentation available upon request or included with order documentation.</div>
+            </div>
+            <div class="bg-white border border-slate-200 rounded-2xl p-5">
+                <div class="font-semibold flex items-center gap-2"><i class="fa-solid fa-question-circle text-slate-400"></i> Who can purchase from Apex Research?</div>
+                <div class="text-sm text-slate-600 mt-2 pl-6">Qualified researchers, universities, pharmaceutical companies, contract research organizations, and other legitimate scientific entities. We reserve the right to refuse any order that does not meet our compliance standards.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTACT -->
+    <div id="contact" class="bg-slate-900 text-white py-14">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-x-12 gap-y-10">
+                <div>
+                    <div class="uppercase text-xs tracking-[2px] text-slate-400 mb-2">FOR RESEARCH INSTITUTIONS</div>
+                    <div class="text-4xl tracking-tighter font-semibold">Need a quote or custom synthesis?</div>
+                    <p class="mt-3 text-slate-400 max-w-sm">Our research account managers work directly with laboratories and institutions. Bulk pricing and custom vialing available.</p>
+                    
+                    <div class="mt-8 text-sm">
+                        <div class="flex items-center gap-2 text-slate-400"><i class="fa-solid fa-envelope w-4"></i> research@apexresearch.example</div>
+                        <div class="flex items-center gap-2 text-slate-400 mt-1"><i class="fa-solid fa-phone w-4"></i> +1 (555) 248-0192 (Research Sales)</div>
+                    </div>
+                </div>
+
+                <div class="bg-slate-800 rounded-3xl p-7">
+                    <div class="text-sm font-medium mb-4">Research Inquiry Form (Demo)</div>
+                    <form onsubmit="submitInquiry(event)">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <input type="text" placeholder="Institution / Lab Name" required class="bg-slate-700 text-sm border border-slate-600 rounded-xl px-4 py-2.5 placeholder:text-slate-400 outline-none">
+                            <input type="email" placeholder="Research Email" required class="bg-slate-700 text-sm border border-slate-600 rounded-xl px-4 py-2.5 placeholder:text-slate-400 outline-none">
+                            <input type="text" placeholder="Research Focus Area" class="bg-slate-700 text-sm border border-slate-600 rounded-xl px-4 py-2.5 placeholder:text-slate-400 outline-none sm:col-span-2">
+                        </div>
+                        <button type="submit" 
+                                class="mt-5 w-full py-3 rounded-2xl bg-white text-slate-900 font-semibold text-sm hover:bg-amber-50 transition-colors">
+                            SUBMIT RESEARCH INQUIRY
+                        </button>
+                        <p class="text-center text-[10px] text-slate-500 mt-3">This is a demonstration form. In production this would route to your sales team.</p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-950 text-slate-400 text-xs py-9">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-y-4">
+                <div>
+                    &copy; 2026 Apex Research Laboratories. All rights reserved.<br>
+                    <span class="text-slate-600">This site and all products are intended solely for research purposes.</span>
+                </div>
+                <div class="flex gap-x-5">
+                    <a href="#compliance" class="hover:text-white transition-colors">Compliance Statement</a>
+                    <a href="#faq" class="hover:text-white transition-colors">Research FAQ</a>
+                    <button onclick="showFullDisclaimer()" class="hover:text-white transition-colors">Full Legal Disclaimer</button>
+                </div>
+            </div>
+            
+            <div class="mt-6 pt-6 border-t border-slate-800 text-[10px] leading-relaxed max-w-4xl">
+                <strong>DISCLAIMER:</strong> This website is a template provided for demonstration purposes. The products listed are not real inventory for sale unless operated by a properly licensed and compliant research chemical supplier. 
+                Nothing on this site should be construed as an offer to sell products for human use. All buyers must independently verify legality in their jurisdiction. 
+                Apex Research and this template assume no liability for misuse. By accessing this site you agree that you understand these products are <strong>NOT FOR HUMAN USE</strong>.
+            </div>
+        </div>
+    </footer>
+
+    <!-- PRODUCT DETAIL MODAL -->
+    <div id="product-modal" onclick="if (event.target.id === 'product-modal') hideProductModal()" class="hidden fixed inset-0 bg-black/70 z-[70] flex items-center justify-center p-4">
+        <div onclick="event.stopImmediatePropagation()" class="bg-white w-full max-w-2xl rounded-3xl overflow-hidden modal shadow-2xl">
+            <div class="p-6 md:p-8">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <div id="modal-badge" class="research-badge inline-block mb-3">RESEARCH USE ONLY</div>
+                        <h3 id="modal-name" class="text-3xl font-semibold tracking-tighter"></h3>
+                        <div id="modal-meta" class="text-slate-500 mt-1 text-sm"></div>
+                    </div>
+                    <button onclick="hideProductModal()" class="text-slate-400 hover:text-slate-600 p-2 -mr-2 -mt-2"><i class="fa-solid fa-times text-xl"></i></button>
+                </div>
+
+                <div id="modal-price" class="mt-4 text-4xl font-semibold tracking-tighter"></div>
+
+                <div class="mt-6 border border-slate-200 rounded-2xl p-4 bg-slate-50">
+                    <div class="uppercase text-xs font-semibold text-amber-700 tracking-widest mb-1.5">STRICT WARNING</div>
+                    <div class="text-sm text-amber-900 font-medium">
+                        FOR RESEARCH USE ONLY. NOT FOR HUMAN CONSUMPTION. 
+                        This product is not a drug, food, or cosmetic and is not intended for human use in any form.
+                    </div>
+                </div>
+
+                <div id="modal-desc" class="mt-6 text-sm text-slate-600 leading-relaxed"></div>
+
+                <div class="mt-6 grid grid-cols-2 gap-3 text-xs">
+                    <div class="bg-white border rounded-xl p-3">
+                        <div class="text-slate-500">Purity (HPLC)</div>
+                        <div id="modal-purity" class="font-semibold text-lg"></div>
+                    </div>
+                    <div class="bg-white border rounded-xl p-3">
+                        <div class="text-slate-500">Vial Size</div>
+                        <div id="modal-size" class="font-semibold text-lg"></div>
+                    </div>
+                </div>
+
+                <div class="mt-6 flex items-center gap-3">
+                    <div class="flex-1">
+                        <label class="block text-xs font-medium text-slate-500 mb-1">Quantity</label>
+                        <div class="flex border border-slate-300 rounded-2xl overflow-hidden w-fit">
+                            <button onclick="changeModalQty(-1)" class="px-4 py-2 hover:bg-slate-100 active:bg-slate-200 transition-colors text-lg leading-none">-</button>
+                            <div id="modal-qty" class="px-5 py-2 font-semibold border-x border-slate-300 flex items-center min-w-[42px] justify-center">1</div>
+                            <button onclick="changeModalQty(1)" class="px-4 py-2 hover:bg-slate-100 active:bg-slate-200 transition-colors text-lg leading-none">+</button>
+                        </div>
+                    </div>
+                    <button onclick="addCurrentToCart()" 
+                            class="flex-1 bg-slate-900 hover:bg-black transition-colors text-white py-[13px] rounded-2xl font-semibold text-sm">
+                        ADD TO RESEARCH CART
+                    </button>
+                </div>
+
+                <div class="text-center mt-4">
+                    <button onclick="hideProductModal()" class="text-xs text-slate-500 hover:text-slate-700">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CART SIDEBAR -->
+    <div id="cart-sidebar" onclick="if (event.target.id === 'cart-sidebar') hideCart()" class="hidden fixed inset-0 bg-black/60 z-[80] flex justify-end">
+        <div onclick="event.stopImmediatePropagation()" class="bg-white w-full max-w-md h-full overflow-auto flex flex-col">
+            <div class="p-5 border-b flex items-center justify-between">
+                <div class="font-semibold text-xl tracking-tight">Your Research Cart</div>
+                <button onclick="hideCart()" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-times text-2xl"></i></button>
+            </div>
+
+            <div id="cart-items" class="flex-1 p-5 space-y-4 overflow-auto">
+                <!-- JS populated -->
+            </div>
+
+            <div class="border-t p-5 bg-slate-50">
+                <div class="flex justify-between font-medium text-lg mb-1">
+                    <div>Subtotal</div>
+                    <div id="cart-subtotal" class="font-semibold">$0.00</div>
+                </div>
+                <div class="text-xs text-slate-500 mb-4">Shipping calculated at checkout for verified research accounts.</div>
+
+                <button onclick="proceedToCheckout()" 
+                        class="w-full py-3.5 bg-slate-900 hover:bg-black text-white rounded-2xl font-semibold text-sm transition-colors">
+                    PROCEED TO CHECKOUT
+                </button>
+
+                <div class="mt-4 text-center">
+                    <div onclick="hideCart()" class="text-xs cursor-pointer text-slate-500 hover:text-slate-700">Continue shopping</div>
+                </div>
+
+                <div class="mt-3 text-[10px] text-center text-amber-700 bg-amber-50 py-2 px-3 rounded-xl leading-snug">
+                    All orders are subject to compliance review. Products are for research purposes only.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CHECKOUT MODAL -->
+    <div id="checkout-modal" onclick="if (event.target.id === 'checkout-modal') hideCheckout()" class="hidden fixed inset-0 bg-black/70 z-[90] flex items-center justify-center p-4">
+        <div onclick="event.stopImmediatePropagation()" class="bg-white max-w-lg w-full rounded-3xl overflow-hidden modal">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-1">
+                    <div class="font-semibold text-xl">Checkout — Research Order</div>
+                    <button onclick="hideCheckout()" class="text-xl leading-none text-slate-400 hover:text-slate-700">&times;</button>
+                </div>
+                <div class="text-xs text-amber-600 font-medium mb-5">This is a DEMONSTRATION checkout. No real payment or order will be processed.</div>
+
+                <form id="checkout-form" onsubmit="submitCheckout(event)">
+                    <div class="space-y-4">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="text-xs font-semibold text-slate-500 block mb-1">Full Name / Researcher</label>
+                                <input required type="text" class="w-full border border-slate-300 rounded-xl px-3 py-2 text-sm" value="Dr. Elena Voss">
+                            </div>
+                            <div>
+                                <label class="text-xs font-semibold text-slate-500 block mb-1">Institution / Lab</label>
+                                <input required type="text" class="w-full border border-slate-300 rounded-xl px-3 py-2 text-sm" value="Vanguard Institute of Molecular Research">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="text-xs font-semibold text-slate-500 block mb-1">Research Email</label>
+                            <input required type="email" class="w-full border border-slate-300 rounded-xl px-3 py-2 text-sm" value="elena.voss@vimr-research.example">
+                        </div>
+                        <div>
+                            <label class="text-xs font-semibold text-slate-500 block mb-1">Shipping Address (Must be a verified research facility)</label>
+                            <textarea required class="w-full border border-slate-300 rounded-2xl px-3 py-2 text-sm h-16" placeholder="Lab address only">42 Research Way, Building B
+Vanguard Research Park, CA 90210</textarea>
+                        </div>
+
+                        <!-- MANDATORY RESEARCH AFFIRMATIONS -->
+                        <div class="border border-red-200 bg-red-50 rounded-2xl p-4">
+                            <div class="text-red-800 text-xs font-bold tracking-wider mb-3 flex items-center gap-1">
+                                <i class="fa-solid fa-exclamation-triangle"></i>
+                                <span>MANDATORY RESEARCH USE AFFIRMATIONS</span>
+                            </div>
+                            
+                            <div class="space-y-2.5 text-xs">
+                                <label class="flex gap-2 items-start cursor-pointer">
+                                    <input type="checkbox" required class="mt-0.5 accent-red-600">
+                                    <span>I confirm that this purchase is <strong>solely for legitimate in vitro laboratory research</strong> and not for any human or animal use, consumption, or therapeutic purpose.</span>
+                                </label>
+                                <label class="flex gap-2 items-start cursor-pointer">
+                                    <input type="checkbox" required class="mt-0.5 accent-red-600">
+                                    <span>I understand and acknowledge that these products are <strong>NOT FOR HUMAN USE</strong> under any circumstances and have not been approved by the FDA or any regulatory body for human consumption.</span>
+                                </label>
+                                <label class="flex gap-2 items-start cursor-pointer">
+                                    <input type="checkbox" required class="mt-0.5 accent-red-600">
+                                    <span>I am a qualified researcher or represent a legitimate research institution and am authorized to procure these compounds for research purposes.</span>
+                                </label>
+                                <label class="flex gap-2 items-start cursor-pointer">
+                                    <input type="checkbox" required class="mt-0.5 accent-red-600">
+                                    <span>I have read and agree to the full Compliance Statement and understand that misrepresentation may result in order cancellation, reporting, and legal action.</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="pt-2">
+                            <button type="submit" 
+                                    class="w-full bg-red-700 hover:bg-red-800 transition-colors text-white font-semibold py-3.5 rounded-2xl text-sm">
+                                PLACE RESEARCH ORDER (DEMO)
+                            </button>
+                            <p class="text-center text-[10px] text-slate-500 mt-2">No payment will be processed. This simulates a compliant research order workflow.</p>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- SUCCESS / ORDER PLACED MODAL -->
+    <div id="success-modal" onclick="if (event.target.id === 'success-modal') hideSuccess()" class="hidden fixed inset-0 bg-black/70 z-[100] flex items-center justify-center p-4">
+        <div onclick="event.stopImmediatePropagation()" class="bg-white max-w-md w-full rounded-3xl p-8 modal text-center">
+            <div class="mx-auto w-14 h-14 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center mb-5">
+                <i class="fa-solid fa-check text-3xl"></i>
+            </div>
+            <div class="font-semibold text-2xl tracking-tight">Order Received</div>
+            <div class="text-sm mt-1 text-slate-600">Reference: <span id="order-ref" class="font-mono font-semibold"></span></div>
+
+            <div class="my-6 text-xs text-left bg-slate-50 border border-slate-100 p-4 rounded-2xl text-slate-600">
+                <strong class="text-emerald-700">This is a demonstration only.</strong><br>
+                In a live system this order would be reviewed for compliance before any processing or payment. 
+                You would receive lot-specific COAs and shipping documentation.
+            </div>
+
+            <div class="text-xs text-amber-700 mb-6">
+                Remember: These products are for <strong>research use only</strong> and <strong>not for human use</strong>.
+            </div>
+
+            <button onclick="completeOrder()" 
+                    class="w-full py-3 rounded-2xl border border-slate-300 hover:bg-slate-50 text-sm font-semibold">
+                CLOSE &amp; RETURN TO CATALOG
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Tailwind script config
+        function initTailwind() {
+            document.documentElement.style.setProperty('--accent', '#0f172a');
+        }
+
+        // Product data - EDIT THIS ARRAY TO CUSTOMIZE YOUR CATALOG
+        let products = [
+            {
+                id: 1,
+                name: "BPC-157",
+                category: "Healing",
+                price: 59.99,
+                size: "5 mg",
+                purity: "99.8%",
+                shortDesc: "Body Protection Compound-157 — gastric pentadecapeptide studied for tissue repair pathways.",
+                longDesc: "BPC-157 is a synthetic pentadecapeptide derived from a gastric protein. It is widely studied in laboratory models of tissue repair, angiogenesis, and inflammatory modulation. For research use only."
+            },
+            {
+                id: 2,
+                name: "TB-500 (Thymosin β4)",
+                category: "Healing",
+                price: 74.99,
+                size: "5 mg",
+                purity: "99.6%",
+                shortDesc: "Actin-sequestering peptide investigated for cellular migration and wound healing research.",
+                longDesc: "Thymosin Beta-4 (TB-500) is a 43-amino acid peptide studied extensively in research models involving actin regulation, cell migration, and tissue remodeling. Research use only."
+            },
+            {
+                id: 3,
+                name: "CJC-1295 with DAC",
+                category: "Growth",
+                price: 89.00,
+                size: "2 mg",
+                purity: "99.7%",
+                shortDesc: "Long-acting Growth Hormone Releasing Hormone (GHRH) analog for endocrine research.",
+                longDesc: "CJC-1295 with Drug Affinity Complex is a modified GHRH analog studied for prolonged growth hormone release stimulation in research models. For laboratory research only."
+            },
+            {
+                id: 4,
+                name: "Ipamorelin",
+                category: "Growth",
+                price: 49.99,
+                size: "5 mg",
+                purity: "99.9%",
+                shortDesc: "Selective ghrelin receptor agonist and growth hormone secretagogue.",
+                longDesc: "Ipamorelin is a selective growth hormone secretagogue studied for its ability to stimulate GH release with minimal impact on cortisol or prolactin. Research use only."
+            },
+            {
+                id: 5,
+                name: "Semaglutide (Research)",
+                category: "Metabolic",
+                price: 129.00,
+                size: "5 mg",
+                purity: "99.5%",
+                shortDesc: "GLP-1 receptor agonist analog used in metabolic and incretin research.",
+                longDesc: "Semaglutide research compound for laboratory investigation of GLP-1 receptor pathways, glucose homeostasis, and related metabolic mechanisms. Not for human use."
+            },
+            {
+                id: 6,
+                name: "Tirzepatide (Research)",
+                category: "Metabolic",
+                price: 149.00,
+                size: "5 mg",
+                purity: "99.4%",
+                shortDesc: "Dual GIP/GLP-1 receptor agonist for advanced metabolic research models.",
+                longDesc: "Tirzepatide is a dual incretin mimetic studied in research settings for its effects on metabolic parameters. Sold strictly for in vitro research purposes."
+            },
+            {
+                id: 7,
+                name: "Melanotan II",
+                category: "Melanocortin",
+                price: 39.99,
+                size: "10 mg",
+                purity: "99.3%",
+                shortDesc: "Synthetic melanocortin receptor agonist used in pigmentation pathway studies.",
+                longDesc: "Melanotan II is a cyclic heptapeptide analog of α-MSH studied for melanocortin receptor activity and pigmentation research. Research use only."
+            },
+            {
+                id: 8,
+                name: "AOD-9604",
+                category: "Metabolic",
+                price: 54.99,
+                size: "5 mg",
+                purity: "99.7%",
+                shortDesc: "Fragment of human growth hormone studied for lipolytic and metabolic research.",
+                longDesc: "AOD-9604 is a modified fragment of the C-terminal region of hGH investigated in research models of fat metabolism. For research purposes only."
+            },
+            {
+                id: 9,
+                name: "Tesamorelin",
+                category: "Growth",
+                price: 79.99,
+                size: "2 mg",
+                purity: "99.5%",
+                shortDesc: "Growth Hormone Releasing Hormone analog studied in visceral fat research models.",
+                longDesc: "Tesamorelin is a stabilized GHRH analog used in laboratory research focused on growth hormone axis and body composition pathways. Research use only."
+            },
+            {
+                id: 10,
+                name: "PT-141 (Bremelanotide)",
+                category: "Melanocortin",
+                price: 44.99,
+                size: "10 mg",
+                purity: "99.1%",
+                shortDesc: "Melanocortin receptor agonist primarily studied for central nervous system pathways.",
+                longDesc: "PT-141 (Bremelanotide) is a synthetic peptide analog of α-MSH studied for its activity at melanocortin receptors in research settings. Not for human use."
+            }
+        ];
+
+        let cart = [];
+        let currentProduct = null;
+        let currentModalQty = 1;
+
+        function updateCartCount() {
+            const countEl = document.getElementById('cart-count');
+            const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+            countEl.textContent = totalItems;
+            if (totalItems === 0) {
+                countEl.classList.add('hidden');
+            } else {
+                countEl.classList.remove('hidden');
+            }
+        }
+
+        function saveCart() {
+            localStorage.setItem('apex_cart', JSON.stringify(cart));
+            updateCartCount();
+        }
+
+        function loadCart() {
+            const saved = localStorage.getItem('apex_cart');
+            if (saved) {
+                cart = JSON.parse(saved);
+            }
+            updateCartCount();
+        }
+
+        function renderProducts(filteredProducts = null) {
+            const grid = document.getElementById('products-grid');
+            grid.innerHTML = '';
+
+            const toRender = filteredProducts || products;
+
+            if (toRender.length === 0) {
+                grid.innerHTML = `<div class="col-span-full text-center py-12 text-slate-500">No products match your search.</div>`;
+                return;
+            }
+
+            toRender.forEach(product => {
+                const card = document.createElement('div');
+                card.className = `product-card bg-white border border-slate-200 rounded-3xl overflow-hidden flex flex-col`;
+                
+                card.innerHTML = `
+                    <div class="h-2 bg-gradient-to-r from-slate-800 to-slate-900"></div>
+                    <div class="p-5 flex flex-col flex-1">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <div class="research-badge mb-2">RESEARCH USE ONLY</div>
+                                <h3 class="font-semibold text-xl tracking-tight">${product.name}</h3>
+                                <div class="text-xs text-slate-500 mt-0.5">${product.size} vial • ${product.purity}</div>
+                            </div>
+                            <div class="text-right">
+                                <div class="font-semibold text-2xl tracking-tighter">$${product.price.toFixed(2)}</div>
+                            </div>
+                        </div>
+
+                        <div class="mt-3 text-sm text-slate-600 flex-1">${product.shortDesc}</div>
+
+                        <div class="mt-auto pt-4 flex items-center gap-2">
+                            <button onclick="event.stopImmediatePropagation(); showProductModal(${product.id});" 
+                                    class="flex-1 text-xs font-semibold py-2 border border-slate-300 rounded-2xl hover:bg-slate-50 transition-colors">
+                                DETAILS
+                            </button>
+                            <button onclick="event.stopImmediatePropagation(); addToCart(${product.id});" 
+                                    class="flex-1 text-xs font-semibold py-2 bg-slate-900 text-white rounded-2xl hover:bg-black transition-colors">
+                                ADD TO CART
+                            </button>
+                        </div>
+                    </div>
+                `;
+
+                // Click entire card to open details (except buttons)
+                card.addEventListener('click', () => showProductModal(product.id));
+                grid.appendChild(card);
+            });
+        }
+
+        function filterProducts() {
+            const search = document.getElementById('search-input').value.toLowerCase().trim();
+            const category = document.getElementById('category-filter').value;
+
+            let filtered = products;
+
+            if (search) {
+                filtered = filtered.filter(p => 
+                    p.name.toLowerCase().includes(search) || 
+                    p.shortDesc.toLowerCase().includes(search) ||
+                    p.longDesc.toLowerCase().includes(search)
+                );
+            }
+
+            if (category) {
+                filtered = filtered.filter(p => p.category === category);
+            }
+
+            renderProducts(filtered);
+        }
+
+        function showProductModal(productId) {
+            currentProduct = products.find(p => p.id === productId);
+            if (!currentProduct) return;
+
+            currentModalQty = 1;
+
+            document.getElementById('modal-name').textContent = currentProduct.name;
+            document.getElementById('modal-meta').innerHTML = `${currentProduct.size} vial &bull; HPLC ${currentProduct.purity}`;
+            document.getElementById('modal-price').innerHTML = `$${currentProduct.price.toFixed(2)} <span class="text-sm font-normal text-slate-500">per vial</span>`;
+            document.getElementById('modal-desc').textContent = currentProduct.longDesc;
+            document.getElementById('modal-purity').textContent = currentProduct.purity;
+            document.getElementById('modal-size').textContent = currentProduct.size;
+
+            document.getElementById('modal-qty').textContent = currentModalQty;
+
+            document.getElementById('product-modal').classList.remove('hidden');
+            document.getElementById('product-modal').classList.add('flex');
+        }
+
+        function hideProductModal() {
+            const modal = document.getElementById('product-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        function changeModalQty(delta) {
+            currentModalQty = Math.max(1, currentModalQty + delta);
+            document.getElementById('modal-qty').textContent = currentModalQty;
+        }
+
+        function addCurrentToCart() {
+            if (!currentProduct) return;
+            addToCart(currentProduct.id, currentModalQty);
+            hideProductModal();
+        }
+
+        function addToCart(productId, qty = 1) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+
+            const existing = cart.find(item => item.id === productId);
+            if (existing) {
+                existing.qty += qty;
+            } else {
+                cart.push({ ...product, qty });
+            }
+
+            saveCart();
+            
+            // Toast feedback
+            showToast(`${qty} × ${product.name} added to cart`);
+        }
+
+        function showToast(message) {
+            const toast = document.createElement('div');
+            toast.className = `fixed bottom-5 left-1/2 -translate-x-1/2 bg-slate-900 text-white text-sm px-5 py-2.5 rounded-2xl shadow-xl z-[200] flex items-center gap-2`;
+            toast.innerHTML = `<i class="fa-solid fa-check-circle text-emerald-400"></i> <span>${message}</span>`;
+            document.body.appendChild(toast);
+
+            setTimeout(() => {
+                toast.style.transition = 'all 0.2s';
+                toast.style.opacity = '0';
+                setTimeout(() => toast.remove(), 150);
+            }, 1600);
+        }
+
+        function showCart() {
+            const sidebar = document.getElementById('cart-sidebar');
+            const itemsContainer = document.getElementById('cart-items');
+
+            itemsContainer.innerHTML = '';
+
+            if (cart.length === 0) {
+                itemsContainer.innerHTML = `
+                    <div class="h-64 flex flex-col items-center justify-center text-center px-8">
+                        <i class="fa-solid fa-shopping-cart text-4xl text-slate-300 mb-3"></i>
+                        <div class="font-medium text-slate-400">Your research cart is empty</div>
+                        <div class="text-xs text-slate-400 mt-1">Add peptides from the catalog to begin an order.</div>
+                    </div>
+                `;
+            } else {
+                cart.forEach((item, index) => {
+                    const el = document.createElement('div');
+                    el.className = 'flex gap-3 bg-white border border-slate-100 rounded-2xl p-3';
+                    el.innerHTML = `
+                        <div class="flex-1 min-w-0">
+                            <div class="font-semibold text-sm tracking-tight">${item.name}</div>
+                            <div class="text-xs text-slate-500">${item.size} • $${item.price.toFixed(2)} each</div>
+                            
+                            <div class="mt-2 flex items-center gap-2">
+                                <div class="inline-flex border border-slate-200 rounded-xl text-sm">
+                                    <button onclick="changeCartQty(${index}, -1)" class="px-2.5 py-px hover:bg-slate-100 active:bg-slate-200 rounded-l-xl">-</button>
+                                    <div class="px-3 py-px font-medium border-x border-slate-200 flex items-center">${item.qty}</div>
+                                    <button onclick="changeCartQty(${index}, 1)" class="px-2.5 py-px hover:bg-slate-100 active:bg-slate-200 rounded-r-xl">+</button>
+                                </div>
+                                <button onclick="removeFromCart(${index})" class="text-xs text-red-600 hover:text-red-700 px-2">Remove</button>
+                            </div>
+                        </div>
+                        <div class="text-right font-semibold tabular-nums pt-1">
+                            $${(item.price * item.qty).toFixed(2)}
+                        </div>
+                    `;
+                    itemsContainer.appendChild(el);
+                });
+            }
+
+            // Update subtotal
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+            document.getElementById('cart-subtotal').textContent = `$${subtotal.toFixed(2)}`;
+
+            sidebar.classList.remove('hidden');
+            sidebar.classList.add('flex');
+        }
+
+        function changeCartQty(index, delta) {
+            cart[index].qty = Math.max(1, cart[index].qty + delta);
+            saveCart();
+            showCart(); // re-render
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            saveCart();
+            showCart();
+        }
+
+        function hideCart() {
+            const sidebar = document.getElementById('cart-sidebar');
+            sidebar.classList.remove('flex');
+            sidebar.classList.add('hidden');
+        }
+
+        function proceedToCheckout() {
+            hideCart();
+            if (cart.length === 0) return;
+            
+            const modal = document.getElementById('checkout-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function hideCheckout() {
+            const modal = document.getElementById('checkout-modal');
+            modal.classList.remove('flex');
+            modal.classList.add('hidden');
+        }
+
+        function submitCheckout(e) {
+            e.preventDefault();
+
+            // All required checkboxes are enforced by the browser (required attribute)
+            
+            hideCheckout();
+
+            // Generate fake order reference
+            const ref = 'APX-' + Date.now().toString().slice(-8);
+            document.getElementById('order-ref').textContent = ref;
+
+            const successModal = document.getElementById('success-modal');
+            successModal.classList.remove('hidden');
+            successModal.classList.add('flex');
+
+            // Clear cart after "order"
+            cart = [];
+            saveCart();
+        }
+
+        function completeOrder() {
+            hideSuccess();
+            // Show a final reminder
+            setTimeout(() => {
+                showToast('Thank you. Remember: Research use only. Not for human use.');
+            }, 400);
+        }
+
+        function hideSuccess() {
+            const modal = document.getElementById('success-modal');
+            modal.classList.remove('flex');
+            modal.classList.add('hidden');
+        }
+
+        function submitInquiry(e) {
+            e.preventDefault();
+            const btn = e.target.querySelector('button');
+            const original = btn.innerHTML;
+            btn.innerHTML = 'SUBMITTED — THANK YOU';
+            btn.disabled = true;
+
+            setTimeout(() => {
+                alert('Thank you for your research inquiry.\n\n(This is a demo. In a production site this would send an email to the sales team and log the lead.)\n\nRemember: All inquiries are for research purposes only.');
+                e.target.reset();
+                btn.innerHTML = original;
+                btn.disabled = false;
+            }, 850);
+        }
+
+        function showAgeGate() {
+            const confirmed = confirm(
+                'CONFIRMATION REQUIRED\n\n' +
+                'By proceeding you confirm:\n' +
+                '• You are 18 years of age or older\n' +
+                '• You understand these products are FOR RESEARCH USE ONLY and NOT FOR HUMAN USE\n' +
+                '• You are purchasing on behalf of a qualified research entity or for legitimate laboratory research purposes\n\n' +
+                'Do you agree and wish to continue?'
+            );
+            if (confirmed) {
+                showToast('Thank you. Research use only confirmed.');
+            }
+        }
+
+        function showFullDisclaimer() {
+            const text = `APEX RESEARCH — FULL LEGAL DISCLAIMER (TEMPLATE)
+
+` +
+                `ALL PRODUCTS ARE SOLD FOR RESEARCH PURPOSES ONLY.
+
+` +
+                `1. Products offered on this website are intended SOLELY for in vitro laboratory research use by qualified researchers, universities, institutions, and licensed laboratories.
+
+` +
+                `2. THESE PRODUCTS ARE NOT FOR HUMAN CONSUMPTION, HUMAN USE, OR VETERINARY USE UNDER ANY CIRCUMSTANCES.
+
+` +
+                `3. These products have NOT been evaluated by the U.S. Food and Drug Administration (FDA), European Medicines Agency (EMA), or any other regulatory authority for safety, efficacy, or suitability for any use in humans or animals.
+
+` +
+                `4. By placing an order or using this site, you represent and warrant that you are purchasing these products exclusively for legitimate scientific research and that you will not use, or allow others to use, the products for any purpose other than in vitro research.
+
+` +
+                `5. You are responsible for compliance with all applicable laws in your jurisdiction regarding the possession, use, import, export, and handling of research chemicals.
+
+` +
+                `6. Misrepresentation of intended use, or any attempt to purchase these products for human use, may result in immediate order cancellation, permanent ban from purchasing, and reporting to relevant authorities where required by law.
+
+` +
+                `7. Apex Research assumes no liability whatsoever for any injury, damage, loss, or legal consequences arising from the misuse of these products.
+
+` +
+                `8. This website is provided as a demonstration template. The operator of any live version of this site bears full responsibility for regulatory compliance.
+
+` +
+                `If you do not agree with these terms, do not use this website or attempt to purchase any products.`;
+
+            alert(text);
+        }
+
+        function initProducts() {
+            renderProducts();
+
+            // Make search + filter reactive
+            const searchInput = document.getElementById('search-input');
+            const categoryFilter = document.getElementById('category-filter');
+
+            // Bonus: allow pressing Enter in search to focus results
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    filterProducts();
+                }
+            });
+        }
+
+        function initCart() {
+            loadCart();
+            updateCartCount();
+        }
+
+        // Keyboard escape support
+        function initKeyboard() {
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    const modals = ['product-modal', 'cart-sidebar', 'checkout-modal', 'success-modal'];
+                    for (let id of modals) {
+                        const el = document.getElementById(id);
+                        if (!el.classList.contains('hidden') && el.classList.contains('flex')) {
+                            el.classList.remove('flex');
+                            el.classList.add('hidden');
+                            return;
+                        }
+                    }
+                    // Also close cart sidebar
+                    const cart = document.getElementById('cart-sidebar');
+                    if (!cart.classList.contains('hidden') && cart.classList.contains('flex')) {
+                        cart.classList.remove('flex');
+                        cart.classList.add('hidden');
+                    }
+                }
+            });
+        }
+
+        function initEverything() {
+            initTailwind();
+            initProducts();
+            initCart();
+            initKeyboard();
+
+            // Optional: pre-warm a demo item in cart for new visitors (comment out in production)
+            // setTimeout(() => { if (cart.length === 0) { /* demo only */ } }, 1200);
+
+            // Final safety: remind on unload if cart has items (demo)
+            window.addEventListener('beforeunload', function(e) {
+                if (cart.length > 0) {
+                    // Modern browsers ignore custom message, but this triggers the dialog
+                }
+            });
+
+            console.log('%c[APEX] Research peptides site initialized. All disclaimers active.', 'color:#64748b');
+        }
+
+        // Boot
+        window.onload = initEverything;
+    </script>
+</body>
+</html>
