@@ -4,6 +4,8 @@ Professional, ready-to-deploy static website template for a **research peptides 
 
 **Repository:** https://github.com/jonathonparker21-rgb/research-peptides
 
+**Live demo (once Pages enabled):** `https://jonathonparker21-rgb.github.io/research-peptides`
+
 ### ⚠️ CRITICAL LEGAL DISCLAIMERS
 
 **ALL PRODUCTS AND INFORMATION ON THIS SITE ARE FOR RESEARCH USE ONLY.**
@@ -17,63 +19,56 @@ Professional, ready-to-deploy static website template for a **research peptides 
 
 ### What You Get
 
-- Modern, clean, mobile-responsive single-page website
+- Modern, clean, mobile-responsive single-page website (one `index.html`)
 - Product catalog with categories, search, and detail modals
-- Fully functional client-side shopping cart (localStorage)
-- Checkout flow with **mandatory research-use affirmations**
-- Repeated, highly visible "Research Use Only / Not for Human Use" warnings throughout
-- Fake "order" simulation (clearly marked as demo)
-- Easy to customize products (edit the JS array in `index.html`)
+- Fully functional client-side shopping cart (persists with localStorage)
+- Checkout flow with **4 mandatory research-use legal affirmations** (checkboxes)
+- Repeated, highly visible "Research Use Only / Not for Human Use" warnings on banner, products, modals, cart, checkout, FAQ, and footer
+- Fake "order" simulation (clearly marked as demo, no real payment)
+- Easy to customize (edit the `products` JS array)
 
-### Quick Deploy (Recommended)
+### Quick Deploy
 
-**Vercel (easiest):**
-1. Import the GitHub repo
-2. Deploy (no build step needed)
-3. Done
+**GitHub Pages (free & instant):**
+1. Go to your repo → **Settings** → **Pages**
+2. Source: `Deploy from a branch`
+3. Branch: `main`, Folder: `/ (root)`
+4. Save
+5. Wait ~1 minute → visit `https://jonathonparker21-rgb.github.io/research-peptides`
+
+**Vercel (recommended for production):**
+1. Import repo on vercel.com
+2. Deploy (zero config)
 
 **Netlify:**
-1. Drag the folder or connect GitHub repo
-2. Publish directory = `/` (or root)
-
-**GitHub Pages:**
-1. Go to repo Settings → Pages
-2. Source: Deploy from a branch → `main` / `/ (root)`
-3. Save
-
-The site will be live at `https://<your-username>.github.io/research-peptides`
+1. Connect repo or drag & drop
 
 ### Customization
 
-1. **Products**: Edit the `products` array near the top of the `<script>` in `index.html`. Add/remove items, change prices, descriptions, categories.
-2. **Branding**: Search/replace "APEX RESEARCH" and update colors in the Tailwind script config.
-3. **Contact / Checkout**: The checkout is simulated. For real orders you would need a backend (e.g. Formspree, Supabase Edge Functions + Stripe, or custom server) + compliance/KYC flow.
-4. **Images**: Currently using placeholder colored cards + SVG icons. Replace with real product photos / lab imagery for production (ensure you have rights and proper labeling).
+Open `index.html` and edit the `products` array (around line 280 in the script). You can:
+- Change names, prices, sizes, purity, descriptions
+- Add or remove products
+- Update categories
 
-### Recommended Production Additions
+Branding (logo text, colors) is easy to search/replace.
 
-- Real payment processing with strong verification (Stripe + manual review for research buyers)
-- Customer verification / institutional email checks
-- Backend order storage + audit log
-- COA (Certificate of Analysis) PDF serving per lot
-- Age / research-purpose gate on first visit
-- Shipping only to verified research addresses
-- Full Terms of Service + Privacy Policy pages
-- Integration with inventory / accounting
+**Important:** Keep all the warning banners, badges, modals, and checkout affirmations. They are intentionally very prominent.
 
-**Never sell or market these products for human use.**
+### Recommended Real-World Additions (if you go live)
+- Backend + Stripe or other payment (with strong verification)
+- Institutional / researcher verification step
+- Real COA delivery per lot
+- Proper Terms of Service + Privacy Policy (linked from footer)
+- Audit logging of orders
+- Shipping restrictions to verified research addresses only
+
+**Never market or sell research peptides for human use.** Doing so is illegal in virtually every jurisdiction and can lead to severe penalties.
 
 ### File Structure
-
-- `index.html` — The complete standalone website (Tailwind via CDN + vanilla JS)
+- `index.html` — Complete standalone site
 - `README.md` — This file
+- `.nojekyll` — Ensures GitHub Pages serves the site correctly
 
-### Support / Next Steps
+Consult legal counsel if you plan to operate an actual research supply business.
 
-Fork or clone this repo. Update the product list with your actual catalog (with real lot numbers, COAs, etc.).
-
-If you intend to operate a real research supply business, consult legal counsel familiar with research chemical regulations in your jurisdiction.
-
----
-
-**License**: This template is provided as-is for legitimate research supply demonstration purposes. Use at your own risk.
+Use responsibly.
