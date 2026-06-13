@@ -4,7 +4,7 @@ Professional, ready-to-deploy static website template for a **research peptides 
 
 **Repository:** https://github.com/jonathonparker21-rgb/research-peptides
 
-**Live demo (once Pages enabled):** `https://jonathonparker21-rgb.github.io/research-peptides`
+**Live demo (once deployed):** Will be at your Cloudflare Pages URL (e.g. research-peptides.pages.dev)
 
 ### ⚠️ CRITICAL LEGAL DISCLAIMERS
 
@@ -27,30 +27,33 @@ Professional, ready-to-deploy static website template for a **research peptides 
 - Fake "order" simulation (clearly marked as demo, no real payment)
 - Easy to customize (edit the `products` JS array)
 
-### Quick Deploy
+### Quick Deploy to Cloudflare Pages (Recommended)
 
-**GitHub Pages (free & instant):**
-1. Go to your repo → **Settings** → **Pages**
-2. Source: `Deploy from a branch`
-3. Branch: `main`, Folder: `/ (root)`
-4. Save
-5. Wait ~1 minute → visit `https://jonathonparker21-rgb.github.io/research-peptides`
+This site is a static single-file HTML site — perfect for Cloudflare Pages (free, fast CDN, custom domains, security headers, etc.).
 
-**Vercel (recommended for production):**
-1. Import repo on vercel.com
-2. Deploy (zero config)
+1. Go to [Cloudflare Dashboard](https://dash.cloudflare.com) → **Pages** → **Create a project** → **Connect to Git**
+2. Authorize Cloudflare to access your GitHub (this installs the Cloudflare GitHub App / "plugin" on your account and will prompt to select the repo)
+3. Select the `research-peptides` repository
+4. Configure build:
+   - Framework preset: **None**
+   - Build command: (leave blank)
+   - Build output directory: (leave blank)
+5. Click **Save and Deploy**
+6. Your site will be live at `https://<your-project>.pages.dev`
+7. (Optional) Add a custom domain in the project settings → Custom domains
 
-**Netlify:**
-1. Connect repo or drag & drop
+**Note:** The `_headers` file in the repo configures security headers and CSP automatically for Cloudflare Pages.
+
+Alternative (GitHub Pages):
+1. Repo Settings → Pages → Source: Deploy from a branch → main / (root)
+2. Site at `https://jonathonparker21-rgb.github.io/research-peptides`
 
 ### Customization
 
-Open `index.html` and edit the `products` array (around line 280 in the script). You can:
+Open `index.html` and edit the `products` array (in the JS near the top). You can:
 - Change names, prices, sizes, purity, descriptions
 - Add or remove products
 - Update categories
-
-Branding (logo text, colors) is easy to search/replace.
 
 **Important:** Keep all the warning banners, badges, modals, and checkout affirmations. They are intentionally very prominent.
 
@@ -67,7 +70,8 @@ Branding (logo text, colors) is easy to search/replace.
 ### File Structure
 - `index.html` — Complete standalone site
 - `README.md` — This file
-- `.nojekyll` — Ensures GitHub Pages serves the site correctly
+- `.nojekyll` — (for GitHub Pages compatibility)
+- `_headers` — Cloudflare Pages security headers and CSP
 
 Consult legal counsel if you plan to operate an actual research supply business.
 
